@@ -10,7 +10,7 @@ phoneRegex = re.compile(r'''(
     (\s|-|\.)?                     #separator
     (\d{3})                        #first 3 digits
     (\s|-|\.)                      #separator
-    (\d{4})                        #last 4 digits
+    (\S{4})              #last 4 digits
     (\s*(ext|x|ext.)\s*(\d{2,5}))? #extension
     )''', re.VERBOSE)
 
@@ -23,6 +23,8 @@ emailRegex = re.compile(r'''(
 
 text = str(pyperclip.paste())
 matches = []
+
+
 
 for groups in emailRegex.findall(text):
     matches.append(groups)
@@ -43,3 +45,6 @@ if len(matches) > 0:
     print(MATCHES)
 else:
     print("No phone numbers or emails addresses")
+
+    print(emailRegex.findall(text), end="\n")
+    print(phoneRegex.findall(text), end="\n")
